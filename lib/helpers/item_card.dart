@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 class ItemCard extends StatelessWidget {
   
   final String imagePath, cityName, monthYear, discount, oldPrice, newPrice;
+  final List images;
   ItemCard(this.imagePath, this.cityName, this.monthYear, this.discount,
-      this.oldPrice, this.newPrice);
+      this.oldPrice, this.newPrice, this.images);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ItemCard extends StatelessWidget {
             Navigator.of(context).push(
               new MaterialPageRoute(builder: (context) => 
                 new AboutThisPlace(
-                  imagePath, cityName, 'Good luck', [imagePath, imagePath]
+                  imagePath, cityName, 'Good luck', images
                 )
               )
             );

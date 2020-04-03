@@ -1,3 +1,4 @@
+import 'package:bmc_guide/helpers/drawer_navigation.dart';
 import 'package:bmc_guide/screens/welcome_screens/welcome_header.dart';
 import 'package:bmc_guide/screens/welcome_screens/welcome_quick_actions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -24,6 +25,32 @@ class _WelcomeScreenPageState extends State<WelcomeScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerNavigation(),
+      appBar: AppBar(
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: new BoxDecoration(
+            gradient: new LinearGradient(colors: <Color>[
+              //7928D1
+              const Color(0xFF0075D1),
+              const Color(0xFF00A2E3),
+            ], stops: <double>[
+              0.4,
+              0.6
+            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+          ),
+        ),
+        title: Text(
+            "BMC Guide",
+            style: TextStyle(
+                fontFamily: 'TimeBurner',
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+                fontSize: 25.0,
+                letterSpacing: 1.0
+            )
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(0.0),
         children: <Widget>[

@@ -10,7 +10,7 @@ class _WelcomeHeaderState extends State<WelcomeHeader> {
   @override
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
-    const headerHeight = 160.0;
+    const headerHeight = 120.0;
     return new Container(
       height: headerHeight,
       decoration: new BoxDecoration(
@@ -47,8 +47,7 @@ class _WelcomeHeaderState extends State<WelcomeHeader> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Padding(
-                  padding: const EdgeInsets.only(bottom: 15.0, top: 15),
-                  child: _buildTitle(),
+                  padding: const EdgeInsets.only(bottom: 0, top: 15),
                 ),
                 _buildTotalStats()
               ],
@@ -57,16 +56,6 @@ class _WelcomeHeaderState extends State<WelcomeHeader> {
         ],
       ),
     );
-  }
-
-  Widget _buildTitle() {
-    return new Text("Welcome to BMC Guide",
-        style: new TextStyle(
-            fontFamily: TimeBurner,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-            fontSize: 25.0,
-            letterSpacing: 1.0));
   }
 
   Widget _buildTotalStats() {

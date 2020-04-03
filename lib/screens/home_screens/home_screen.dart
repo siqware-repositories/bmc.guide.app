@@ -10,21 +10,27 @@ final Widget placeholder = Container(color: Colors.grey);
 
 List<ItemCard> travelPlaceCard = [
   ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "ប្រាសាទកោះគេ",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
       "https://kohsantepheapdaily.com.kh/wp-content/uploads/2019/12/d87365f00eaf4dfa813c1d848539bb37-8.jpg",
       "បន្ទាយឆ្មារ",
       "12 Feb",
       "10",
       "500",
-      '440'),
-  ItemCard("https://i.imgur.com/AWdLPAp.jpg", "អាង ទំពាំងថ្ម", "12 Feb", "10",
-      "500", '440'),
+      '440',
+      [
+        'https://i2.wp.com/www.visitbanteaychhmar.org/wp-content/uploads/2014/12/Dharmasala-of-Banteay-Chhmar.jpg?ssl=1',
+        'https://upload.wikimedia.org/wikipedia/commons/8/88/Banteay_Chhmar_Temple_Entrance.JPG',
+        'https://media-cdn.tripadvisor.com/media/photo-s/13/4a/90/99/banteay-chhmar-temple.jpg'
+      ]
+  ),
+  ItemCard(
+      "https://i.imgur.com/AWdLPAp.jpg",
+      "អាង ទំពាំងថ្ម",
+      "12 Feb",
+      "10",
+      "500",
+      '440',
+      ['']
+  ),
 ];
 
 List<ItemCard> restaurantCard = [
@@ -34,42 +40,9 @@ List<ItemCard> restaurantCard = [
       "12 Feb",
       "10",
       "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg",
-      "Bhaktapur",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2014/07/01/12/35/taxi-cab-381233_960_720.jpg",
-      "Morang",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg",
-      "Bhaktapur",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2014/07/01/12/35/taxi-cab-381233_960_720.jpg",
-      "Morang",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
+      '440',
+      ['']
+  ),
 ];
 List<ItemCard> hotelCard = [
   ItemCard(
@@ -78,42 +51,9 @@ List<ItemCard> hotelCard = [
       "12 Feb",
       "10",
       "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg",
-      "Bhaktapur",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2014/07/01/12/35/taxi-cab-381233_960_720.jpg",
-      "Morang",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2017/12/10/17/40/prague-3010407_960_720.jpg",
-      "Bhaktapur",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2014/07/01/12/35/taxi-cab-381233_960_720.jpg",
-      "Morang",
-      "12 Feb",
-      "10",
-      "500",
-      '440'),
+      '440',
+      ['']
+  ),
 ];
 
 
@@ -132,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Home Page'),
+          title: Text('Home Page', style: TextStyle(fontFamily: 'Lobster'),),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(

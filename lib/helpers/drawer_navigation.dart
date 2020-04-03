@@ -1,93 +1,101 @@
-import 'package:bmc_guide/app/plugins/animation1.dart';
-import 'package:bmc_guide/app/plugins/oval_right_clipper.dart';
+
 import 'package:bmc_guide/page/main_page.dart';
-import 'package:bmc_guide/screens/home_screens/home_screen.dart';
+import 'package:bmc_guide/screens/about/about.dart';
+import 'package:bmc_guide/screens/contact/contact.dart';
+import 'package:bmc_guide/screens/welcome_screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
-
-final Color primary = Color(0xFFFFFFFF);
-final Color active = Color(0xFF0075D1);
+List<dynamic> drawerItem = [
+  {
+    'asset':'assets/images/map.png',
+    'name':'Direction'
+  },
+  {
+    'asset':'assets/images/map.png',
+    'name':'Hotel'
+  },
+  {
+    'asset':'assets/images/dish.png',
+    'name':'Restaurant'
+  },
+  {
+    'asset':'assets/images/map.png',
+    'name':'Gallary'
+  }
+];
 
 class DrawerNavigation extends StatelessWidget {
-  const DrawerNavigation({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _buildDrawer(context),
-    );
-  }
-}
-
-_buildDrawer(BuildContext context) {
-    final String image = images[0];
-    
-    return ClipPath(
-      clipper: OvalRightBorderClipper(),
-      child: Drawer(
-        child: Container(
-          padding: const EdgeInsets.only(left: 16.0, right: 40),
-          decoration: BoxDecoration(
-              color: Color(0xFFFFFFFF), boxShadow: [BoxShadow(color: Colors.black45)]),
-          width: 300,
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  // Container(
-                  //   alignment: Alignment.centerRight,
-                  //   child: IconButton(
-                  //     icon: Icon(
-                  //       Icons.power_settings_new,
-                  //     ),
-                  //     onPressed: () {Navigator.pop(context);},
-                  //   ),
-                  // ),
-                  // Container(
-                  //   height: 90,
-                  //   alignment: Alignment.center,
-                  //   decoration: BoxDecoration(
-                  //       shape: BoxShape.circle,
-                  //       gradient: LinearGradient(
-                  //           colors: [Colors.pink, Colors.deepPurple])),
-                  //   child: CircleAvatar(
-                  //     radius: 40,
-                  //     backgroundImage: CachedNetworkImageProvider(image),
-                  //   ),
-                  // ),
-                  // SizedBox(height: 5.0),
-                  // Text(
-                  //   "erika costell",
-                  //   style: TextStyle(color: Colors.white, fontSize: 18.0),
-                  // ),
-                  // Text(
-                  //   "@erika07",
-                  //   style: TextStyle(color: active, fontSize: 16.0),
-                  // ),
-                  _buildRow(context, Icons.home, "Home", 2),
-                  _buildRow(context, Icons.place, "Travel Place", 0),
-                  _buildRow(context, Icons.restaurant, "Restaurant", 3),
-                  _buildRow(context, Icons.hotel, "Hotel", 1),
-                  _buildRow(context, Icons.info_outline, "Help", 2),
-                ],
-              ),
+    return Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          Container(
+            height: 80.0,
+            child: DrawerHeader(
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                  },
+                  child: Text('BMC Guide', style: TextStyle(
+                    color: Colors.white, fontFamily: 'Lobster', fontWeight: FontWeight.bold, fontSize: 20)),
+                ),
+                decoration: new BoxDecoration(
+            gradient: new LinearGradient(colors: <Color>[
+              //7928D1
+              const Color(0xFF0075D1),
+              const Color(0xFF00A2E3),
+            ], stops: <double>[
+              0.3,
+              0.8
+            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+          ),
+                margin: EdgeInsets.all(0.0),
+                padding: EdgeInsets.all(10.0)
             ),
           ),
-        ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => MainPage(2)));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.place),
+            title: Text('Place Travel'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => MainPage(0)));
+            },
+          ),ListTile(
+            leading: Icon(Icons.restaurant),
+            title: Text('Restaurant'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => MainPage(3)));
+            },
+          ),ListTile(
+            leading: Icon(Icons.hotel),
+            title: Text('Hotel'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => MainPage(1)));
+            },
+          ),ListTile(
+            leading: Icon(Icons.contact_phone),
+            title: Text('Contact'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => Contact()));
+            },
+          ),ListTile(
+            leading: Icon(Icons.info),
+            title: Text('About'),
+            onTap: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => About()));
+            },
+          ),
+        ],
       ),
     );
   }
-
-  Widget _buildRow(BuildContext context, IconData icon, String title, var index) {
-    // final TextStyle tStyle = TextStyle(color: active, fontSize: 16.0);
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 2.0),
-      child: ListTile(
-            title: Text(title),
-            leading: Icon(icon),
-            onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(builder: (context) => MainPage(index)));
-            },
-          ),
-    );
-  }
+}

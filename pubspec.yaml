@@ -53,6 +53,13 @@ flutter:
     - family: Themify
       fonts:
         - asset: assets/fonts/themify.ttf
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster-Regular.ttf
+    - family: LineAwesome
+    - family: Bokor
+      fonts:
+        - asset: assets/fonts/Bokor-Regular.ttf
     - family: LineAwesome
       fonts:
         - asset: assets/fonts/line-awesome.ttf

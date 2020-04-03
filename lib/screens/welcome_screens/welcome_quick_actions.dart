@@ -14,9 +14,9 @@ class QuickActions extends StatelessWidget {
     return new Container(
       constraints: const BoxConstraints(maxHeight: 120.0),
       margin: const EdgeInsets.only(top: 10.0),
-      child: new Align(
+      child: Align(
         alignment: Alignment.center,
-        child: new ListView(
+        child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.only(
                 left: 10.0, bottom: 20.0, right: 10.0, top: 10.0),
