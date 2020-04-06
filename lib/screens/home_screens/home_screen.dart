@@ -1,12 +1,18 @@
+import 'dart:convert';
 import 'package:bmc_guide/helpers/drawer_navigation.dart';
 import 'package:bmc_guide/helpers/item_card.dart';
 import 'package:bmc_guide/page/main_page.dart';
 import 'package:bmc_guide/screens/home_screens/slide_header.dart';
+import 'package:bmc_guide/screens/store_api/list_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 String cover;
-
-final Widget placeholder = Container(color: Colors.grey);
+String _travelUrl = 'https://bmc.guide.siqware.com/api/travel-api';
+String _restaurantUrl = 'https://bmc.guide.siqware.com/api/restaurant-api';
+List travelApi = [];
+List restaurantApi = [];
 
 List<ItemCard> travelPlaceCard = [
   ItemCard(
@@ -21,16 +27,7 @@ List<ItemCard> travelPlaceCard = [
         'https://upload.wikimedia.org/wikipedia/commons/8/88/Banteay_Chhmar_Temple_Entrance.JPG',
         'https://media-cdn.tripadvisor.com/media/photo-s/13/4a/90/99/banteay-chhmar-temple.jpg'
       ]
-  ),
-  ItemCard(
-      "https://i.imgur.com/AWdLPAp.jpg",
-      "អាង ទំពាំងថ្ម",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
+  )
 ];
 
 List<ItemCard> restaurantCard = [
@@ -66,7 +63,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
+
+  Future<String> getTravelApi() async {
+    http.Response response = await http.get(_travelUrl);
+    this.setState(() {
+      travelApi = json.decode(response.body);
+    });
+    return 'Ok';
+  }
+Future<String> getRestaurantApi() async {
+    http.Response response = await http.get(_restaurantUrl);
+    this.setState(() {
+      restaurantApi = json.decode(response.body);
+    });
+    return 'Ok';
+  }
+
+  @override
+  void initState() {
+    // TODO: implement
+    getTravelApi();
+    getRestaurantApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         color: Colors.black87,
                         fontSize: 15,
-                        fontWeight: FontWeight.w700)),
+                        fontWeight: FontWeight.w700),),
                 Spacer(),
                 Builder(
                     builder: (BuildContext context) => FlatButton(
@@ -114,9 +132,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             height: 210,
-            child: ListView(
+            child: ListView.builder(
+              itemCount: travelApi.length == null ? 0 : travelApi.length,
               scrollDirection: Axis.horizontal,
-              children: travelPlaceCard
+              itemBuilder: (context, index){
+                return ListItemCard(
+                    travelApi[index]['title'],
+                    travelApi[index]['description'],
+                    travelApi[index]['thumbnail'],
+                    travelApi[index]['gallery']['gallery_detail'],
+                    travelApi[index]['views']);
+
+              },
             ),
           ),
           Padding(
@@ -148,8 +175,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             height: 210,
-            child: ListView(
-                scrollDirection: Axis.horizontal, children: restaurantCard),
+            child: ListView.builder(
+              itemCount: restaurantApi.length == null ? 0 : restaurantApi.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index){
+                return ListItemCard(
+                    restaurantApi[index]['title'],
+                    restaurantApi[index]['description'],
+                    restaurantApi[index]['thumbnail'],
+                    restaurantApi[index]['gallery']['gallery_detail'],
+                    restaurantApi[index]['views']);
+
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),

@@ -1,39 +1,35 @@
-import 'package:bmc_guide/helpers/item_card.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-List<ItemCard> itemCard = [
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-];
+import 'package:bmc_guide/helpers/item_card.dart';
+import 'package:bmc_guide/screens/store_api/list_card.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+
+
+String _travelUrl = 'https://bmc.guide.siqware.com/api/travel-api';
+List travelApi = [];
 
 String cover;
-class TravelHome extends StatelessWidget {
-  static final String path = "lib/src/pages/travel/travel_home.dart";
+
+class TravelHome extends StatefulWidget {
+  @override
+  _TravelHomeState createState() => _TravelHomeState();
+}
+
+class _TravelHomeState extends State<TravelHome> {
+  Future<String> getTravelApi() async {
+    http.Response response = await http.get(_travelUrl);
+    this.setState(() {
+      travelApi = json.decode(response.body);
+    });
+    return 'Ok';
+  }
+  @override
+  void initState() {
+    // TODO: implement
+    getTravelApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +51,52 @@ class TravelHome extends StatelessWidget {
         title: Text('Trvel Place', style: TextStyle(fontFamily: 'Lobster'),),
       ),
       body: ListView(
-        children: <Widget>[HomeScreenTop(), homeScreenBottom],
+        children: <Widget>[
+          HomeScreenTop(),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text("Tavel List",
+                      style: TextStyle(
+                          fontFamily: 'Lobster',
+                          color: Colors.black87,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),),
+                    Spacer(),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Container(
+                height: 210,
+                child: ListView.builder(
+                  itemCount: travelApi.length == null ? 0 : travelApi.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index){
+                    return ListItemCard(
+                        travelApi[index]['title'],
+                        travelApi[index]['description'],
+                        travelApi[index]['thumbnail'],
+                        travelApi[index]['gallery']['gallery_detail'],
+                        travelApi[index]['views']);
+
+                  },
+                ),
+              ),
+              Padding(padding: const EdgeInsets.only(bottom: 40))
+            ],
+          )],
       ),
     );
   }
 }
+
 
 class HomeScreenTop extends StatefulWidget {
   @override
@@ -67,6 +104,7 @@ class HomeScreenTop extends StatefulWidget {
 }
 
 class _HomeScreenTopState extends State<HomeScreenTop> {
+
   final TextStyle dropdownMenuLabel =
   TextStyle(color: Colors.white, fontSize: 16);
   final TextStyle dropdownMenuItem =
@@ -80,7 +118,7 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
         ClipPath(
           clipper: WaveClipper(),
           child: Container(
-            height: 250,
+            height: 220,
             decoration: new BoxDecoration(
             gradient: new LinearGradient(colors: <Color>[
               //7928D1
@@ -134,9 +172,6 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
               ],
             ),
           ),
@@ -172,43 +207,4 @@ class WaveClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-final Widget homeScreenBottom = Column(
-  children: <Widget>[
-    // Padding(
-    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-    //   child: Row(
-    //     mainAxisSize: MainAxisSize.max,
-    //     children: <Widget>[
-    //       // Text('Hotel Place',
-    //       //   style: TextStyle(
-    //       //     color: Colors.black87,
-    //       //     fontSize: 15,
-    //       //     fontWeight: FontWeight.w700
-    //       //   )
-    //       // ),
-    //       // Spacer(),
-    //       // Builder(
-    //       //   builder: (BuildContext context) => GestureDetector(
-    //       //     onTap: (){
 
-    //       //     },
-    //       //     child: Text(
-    //       //     "View All",
-    //       //     style: TextStyle(
-    //       //       fontSize: 14, color: Theme.of(context).primaryColor
-    //       //     ),
-    //       //   ),
-    //       //   )
-    //       // ),
-    //       // Padding(padding: const EdgeInsets.only(bottom: 40))
-    //     ],
-    //   ),
-    // ),
-
-    Container(
-      height: 210,
-      child: ListView(scrollDirection: Axis.horizontal, children: itemCard),
-    ),
-    Padding(padding: const EdgeInsets.only(bottom: 40))
-  ],
-);
