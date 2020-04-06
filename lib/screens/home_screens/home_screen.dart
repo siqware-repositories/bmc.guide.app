@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           SlideHeader(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -97,18 +97,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w700)),
                 Spacer(),
                 Builder(
-                    builder: (BuildContext context) => GestureDetector(
-                          child: Text(
-                            "View All",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).push(new MaterialPageRoute(
-                                builder: (context) => new MainPage(0)));
-                          },
-                        ))
+                    builder: (BuildContext context) => FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (context) => new MainPage(0)));
+                      },
+                      child: Text(
+                        "View All",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ))
               ],
             ),
           ),
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -131,18 +131,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w700)),
                 Spacer(),
                 Builder(
-                    builder: (BuildContext context) => GestureDetector(
-                          child: Text(
-                            "View All",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).push(new MaterialPageRoute(
-                                builder: (context) => new MainPage(3)));
-                          },
-                        ))
+                    builder: (BuildContext context) => FlatButton(
+                      onPressed: (){
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (context) => new MainPage(3)));
+                      },
+                      child: Text(
+                        "View All",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ))
               ],
             ),
           ),
@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal, children: restaurantCard),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
@@ -163,18 +163,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.w700)),
                 Spacer(),
                 Builder(
-                    builder: (BuildContext context) => GestureDetector(
-                          child: Text(
-                            "View All",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          onTap: () {
-                            Navigator.of(context).push(new MaterialPageRoute(
-                                builder: (context) => new MainPage(1)));
-                          },
-                        ))
+                    builder: (BuildContext context) => FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).push(new MaterialPageRoute(
+                            builder: (context) => new MainPage(1)));
+                      },
+                      child: Text(
+                        "View All",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).primaryColor),
+                      ),
+                    ))
               ],
             ),
           ),

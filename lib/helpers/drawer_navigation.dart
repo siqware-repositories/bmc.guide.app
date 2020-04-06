@@ -35,8 +35,8 @@ class DrawerNavigation extends StatelessWidget {
           Container(
             height: 80.0,
             child: DrawerHeader(
-                child: GestureDetector(
-                  onTap: (){
+                child: FlatButton(
+                  onPressed: (){
                     Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context) => WelcomeScreen()));
                   },
                   child: Text('BMC Guide', style: TextStyle(

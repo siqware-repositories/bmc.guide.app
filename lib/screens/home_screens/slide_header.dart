@@ -7,17 +7,34 @@ final List<dynamic> imgList = [
   {
     'img':
         "https://media-cdn.tripadvisor.com/media/daodao/photo-w/14/51/dc/67/caption.jpg",
-    'title': 'Title 10',
+    'title': 'Angkor Wat SeimReap',
+    'gallary': [
+      'https://1.bp.blogspot.com/-0axRt7Ur7Iw/W3463x5bOoI/AAAAAAAALeg/b8XTdNJrtCcdSlHCHd4vKK54o1cKzYX_gCLcBGAs/s1600/19250394_1367538133315435_2244393463311273186_o.jpg',
+      'https://2.bp.blogspot.com/-WLZbOABrgto/W3469ZRtMHI/AAAAAAAALgE/B3aWBDsZf6cqBgcmlBXz_1lhfiM_vmH6QCLcBGAs/s1600/19453238_1367527169983198_7530598145979411585_o.jpg',
+      'https://fileqt.qdnd.vn/data/images/27/2018/05/11/vandiep_kh/11052018_vd_09.jpg?w=500',
+      'https://2.bp.blogspot.com/-p_SA_Ce-I00/W4B_ERwtXmI/AAAAAAAAACw/_pF_pcPMtegwFRm0CK4UNFI7w-MzHVFVwCLcBGAs/s640/1137.jpg',
+    ]
   },
   {
     'img':
         "https://twocantravel.com/wp-content/uploads/2016/07/Koh-Rong-Samloem-Tropicalife.net_.jpg",
-    'title': 'Title 20',
+    'title': 'ឆ្នេសមុទ្រ កំពុងសោម',
+    'gallary': [
+      'https://1.bp.blogspot.com/-0axRt7Ur7Iw/W3463x5bOoI/AAAAAAAALeg/b8XTdNJrtCcdSlHCHd4vKK54o1cKzYX_gCLcBGAs/s1600/19250394_1367538133315435_2244393463311273186_o.jpg',
+      'https://2.bp.blogspot.com/-WLZbOABrgto/W3469ZRtMHI/AAAAAAAALgE/B3aWBDsZf6cqBgcmlBXz_1lhfiM_vmH6QCLcBGAs/s1600/19453238_1367527169983198_7530598145979411585_o.jpg',
+      'https://fileqt.qdnd.vn/data/images/27/2018/05/11/vandiep_kh/11052018_vd_09.jpg?w=500',
+      'https://2.bp.blogspot.com/-p_SA_Ce-I00/W4B_ERwtXmI/AAAAAAAAACw/_pF_pcPMtegwFRm0CK4UNFI7w-MzHVFVwCLcBGAs/s640/1137.jpg',
+    ]
   },
   {
     'img':
         "https://www.touropia.com/gfx/d/ten-wonders-of-the-world/angkor.jpg?v=1",
-    'title': 'Title 390',
+    'title': 'ប្រាសាទបាយយ័ន សៀមរាប',
+    'gallary': [
+      'https://i.pinimg.com/originals/f5/32/c1/f532c15d32a543804f0f1b412faf5679.jpg',
+      'https://ttnotes.com/images/bayon-angkor-thom-7.jpg ',
+      'https://media.gadventures.com/media-server/dynamic/blogs/posts/Lauren-Marinigh/2016/07/bayon.jpg',
+    ]
   },
 ];
 
@@ -43,7 +60,7 @@ class SlideHeader extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => 
                   AboutThisPlace(
-                    i['img'], i['title'],'Good luck', [i['img'], i['img']]
+                    i['img'], i['title'],'Good luck', i['gallary']
                   )
                 )
               );

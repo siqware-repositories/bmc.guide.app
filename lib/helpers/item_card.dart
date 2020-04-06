@@ -13,17 +13,17 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(2)),
-        child: InkWell(
-          onTap: (){
+        child: FlatButton(
+          onPressed: (){
             Navigator.of(context).push(
-              new MaterialPageRoute(builder: (context) => 
-                new AboutThisPlace(
-                  imagePath, cityName, 'Good luck', images
+                MaterialPageRoute(builder: (context) =>
+                AboutThisPlace(
+                    imagePath, cityName, 'Good luck', images
                 )
-              )
+                )
             );
           },
           child: Stack(
@@ -84,7 +84,7 @@ class ItemCard extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.all(Radius.circular(10))),
                         child: Text(
-                          "%",
+                          "100%",
                           style: TextStyle(color: Colors.black, fontSize: 14),
                         ))
                   ],

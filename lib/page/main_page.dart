@@ -1,3 +1,4 @@
+import 'package:bmc_guide/screens/detail_screen/Servie_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/hotel_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/place_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/restaurant_detail_screen.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/material.dart';
 int _page = 2;
 
 var screens = [
-  TravelHome(), HotelHome(), HomeScreen(), RestaurantHome(), HomeScreen()
+  TravelHome(), HotelHome(), HomeScreen(), RestaurantHome(), ServiceHome()
 ]; 
 
 class MainPage extends StatefulWidget {
