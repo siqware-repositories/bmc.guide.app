@@ -1,4 +1,7 @@
 import 'package:bmc_guide/page/main_page.dart';
+import 'package:bmc_guide/screens/maps/Restaurant.dart';
+import 'package:bmc_guide/screens/maps/Service.dart';
+import 'package:bmc_guide/screens/maps/Travel.dart';
 import 'package:flutter/material.dart';
 
 class QuickActions extends StatelessWidget {
@@ -22,17 +25,17 @@ class QuickActions extends StatelessWidget {
                 left: 10.0, bottom: 20.0, right: 10.0, top: 10.0),
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              _buildAction("Location\nGuide", () {Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (context) => MainPage(2)));}, Colors.blue, whiteGradient,
+              _buildAction("Location\nGuide", () {Navigator.of(context).push(new MaterialPageRoute(builder: (context) => TravelLocation()));}, Colors.blue, whiteGradient,
                   new AssetImage("assets/images/map.png")),
-              _buildAction("Restaurant\nCafe", () {}, Colors.purple,
+              _buildAction("Restaurant\nCafe", () {Navigator.of(context).push(new MaterialPageRoute(builder: (context) => RestaurantLocation()));}, Colors.purple,
                   whiteGradient, new AssetImage("assets/images/dish.png")),
               _buildAction(
                   "Services\nFly\nCar...",
-                  () {},
+                  () {Navigator.of(context).push(new MaterialPageRoute(builder: (context) => ServiceWelcome()));},
                   Colors.red,
                   whiteGradient,
                   new AssetImage("assets/images/credit-card.png")),
-              _buildAction("Sponsor", () {}, Colors.red, whiteGradient,
+              _buildAction("Sponsor", () {Navigator.of(context).push(new MaterialPageRoute(builder: (context) => ServiceWelcome()));}, Colors.red, whiteGradient,
                   new AssetImage("assets/images/plus.png")),
             ]),
       ),
