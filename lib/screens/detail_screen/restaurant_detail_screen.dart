@@ -1,39 +1,33 @@
+import 'dart:convert';
+
 import 'package:bmc_guide/helpers/item_card.dart';
+import 'package:bmc_guide/screens/store_api/list_card.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-//List<ItemCard> itemCard = [
-//  ItemCard(
-//      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-//      "Kathmandu",
-//      "12 Feb",
-//      "10",
-//      "500",
-//      '440',
-//      ['']
-//  ),
-//  ItemCard(
-//      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-//      "Kathmandu",
-//      "12 Feb",
-//      "10",
-//      "500",
-//      '440',
-//      ['']
-//  ),
-//  ItemCard(
-//      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-//      "Kathmandu",
-//      "12 Feb",
-//      "10",
-//      "500",
-//      '440',
-//      ['']
-//  ),
-//];
 
-String cover;
-class RestaurantHome extends StatelessWidget {
-  static final String path = "lib/src/pages/travel/travel_home.dart";
+
+String _restaurantUrl = 'https://bmc.guide.siqware.com/api/restaurant-api';
+List restaurantApi = [];
+
+class RestaurantHome extends StatefulWidget {
+  @override
+  _RestaurantHomeState createState() => _RestaurantHomeState();
+}
+
+class _RestaurantHomeState extends State<RestaurantHome> {
+  Future<String> getTravelApi() async {
+    http.Response response = await http.get(_restaurantUrl);
+    this.setState(() {
+      restaurantApi = json.decode(response.body);
+    });
+    return 'Ok';
+  }
+  @override
+  void initState() {
+    // TODO: implement
+    getTravelApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +46,61 @@ class RestaurantHome extends StatelessWidget {
             ], begin: Alignment.topRight, end: Alignment.bottomLeft),
           ),
         ),
-        title: Text('Restaurant & Coffee', style: TextStyle(fontFamily: 'Lobster'),),
+        title: Text('Trvel Place', style: TextStyle(fontFamily: 'Lobster'),),
       ),
       body: ListView(
-        children: <Widget>[HomeScreenTop(), homeScreenBottom],
+        children: <Widget>[
+          HomeScreenTop(),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text("Tavel List",
+                      style: TextStyle(
+                          fontFamily: 'Lobster',
+                          color: Colors.black87,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),),
+                    Spacer(),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Container(
+                  height: 210,
+                  child: restaurantApi.length != 0 ? ListView.builder(
+                    itemCount: restaurantApi.length == null ? 0 : restaurantApi.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
+                      return ListItemCard(
+                        restaurantApi[index]['id'],
+                        restaurantApi[index]['title'],
+                        restaurantApi[index]['thumbnail'],
+                        restaurantApi[index]['description'],
+                        restaurantApi[index]['location'],
+                        restaurantApi[index]['location_url'],
+                        restaurantApi[index]['category'],
+                        restaurantApi[index]['status'],
+                        restaurantApi[index]['views'],
+                        restaurantApi[index]['created_at'],
+                        restaurantApi[index]['gallery']['gallery_detail'],
+                      );
+                    },
+                  ) : Container(child: Center(child: Text('Data loading ...')))
+              ),
+              Padding(padding: const EdgeInsets.only(bottom: 40))
+            ],
+          )],
       ),
     );
   }
 }
+
 
 class HomeScreenTop extends StatefulWidget {
   @override
@@ -67,6 +108,7 @@ class HomeScreenTop extends StatefulWidget {
 }
 
 class _HomeScreenTopState extends State<HomeScreenTop> {
+
   final TextStyle dropdownMenuLabel =
   TextStyle(color: Colors.white, fontSize: 16);
   final TextStyle dropdownMenuItem =
@@ -80,17 +122,17 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
         ClipPath(
           clipper: WaveClipper(),
           child: Container(
-            height: 250,
+            height: 220,
             decoration: new BoxDecoration(
-            gradient: new LinearGradient(colors: <Color>[
-              //7928D1
-              const Color(0xFF0075D1),
-              const Color(0xFF00A2E3),
-            ], stops: <double>[
-              0.2,
-              0.6
-            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
-          ),
+              gradient: new LinearGradient(colors: <Color>[
+                //7928D1
+                const Color(0xFF0075D1),
+                const Color(0xFF00A2E3),
+              ], stops: <double>[
+                0.2,
+                0.6
+              ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+            ),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -134,9 +176,6 @@ class _HomeScreenTopState extends State<HomeScreenTop> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
               ],
             ),
           ),
@@ -172,43 +211,4 @@ class WaveClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-final Widget homeScreenBottom = Column(
-  children: <Widget>[
-    // Padding(
-    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-    //   child: Row(
-    //     mainAxisSize: MainAxisSize.max,
-    //     children: <Widget>[
-    //       // Text('Hotel Place',
-    //       //   style: TextStyle(
-    //       //     color: Colors.black87,
-    //       //     fontSize: 15,
-    //       //     fontWeight: FontWeight.w700
-    //       //   )
-    //       // ),
-    //       // Spacer(),
-    //       // Builder(
-    //       //   builder: (BuildContext context) => GestureDetector(
-    //       //     onTap: (){
 
-    //       //     },
-    //       //     child: Text(
-    //       //     "View All",
-    //       //     style: TextStyle(
-    //       //       fontSize: 14, color: Theme.of(context).primaryColor
-    //       //     ),
-    //       //   ),
-    //       //   )
-    //       // ),
-    //       // Padding(padding: const EdgeInsets.only(bottom: 40))
-    //     ],
-    //   ),
-    // ),
-
-    Container(
-      height: 210,
-//      child: ListView(scrollDirection: Axis.horizontal, children: itemCard),
-    ),
-    Padding(padding: const EdgeInsets.only(bottom: 40))
-  ],
-);
