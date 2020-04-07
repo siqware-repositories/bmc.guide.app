@@ -3,11 +3,31 @@ import 'package:bmc_guide/screens/destination_screen/destination_screen.dart';
 import 'package:flutter/material.dart';
 
 class ListItemCard extends StatelessWidget {
-  final String title, description, thumbnail;
-  final List galleryDetail;
+  final int id;
+  final String title;
+  final String thumbnail;
+  final String description;
+  final String location;
+  final String locationUrl;
+  final String category;
+  final bool status;
   final int viewer;
+  final String createdAt;
+  final List galleryDetail;
 
-  ListItemCard(this.title, this.description, this.thumbnail, this.galleryDetail, this.viewer);
+  ListItemCard(
+      this.id,
+      this.title,
+      this.thumbnail,
+      this.description,
+      this.location,
+      this.locationUrl,
+      this.category,
+      this.status,
+      this.viewer,
+      this.createdAt,
+      this.galleryDetail,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +40,17 @@ class ListItemCard extends StatelessWidget {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) =>
                     AboutThisPlace(
-                        thumbnail, title, description, galleryDetail
+                        id,
+                        title,
+                        thumbnail,
+                        description,
+                        location,
+                        locationUrl,
+                        category,
+                        status,
+                        viewer,
+                        createdAt,
+                        galleryDetail
                     )
                 )
             );

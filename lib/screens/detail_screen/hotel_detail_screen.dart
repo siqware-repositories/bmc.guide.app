@@ -1,36 +1,6 @@
 import 'package:bmc_guide/helpers/item_card.dart';
 import 'package:flutter/material.dart';
 
-List<ItemCard> itemCard = [
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-];
-
 String cover;
 class HotelHome extends StatelessWidget {
   static final String path = "lib/src/pages/travel/travel_home.dart";
@@ -207,7 +177,7 @@ final Widget homeScreenBottom = Column(
 
     Container(
       height: 210,
-      child: ListView(scrollDirection: Axis.horizontal, children: itemCard),
+//      child: ListView(scrollDirection: Axis.horizontal, children: itemCard),
     ),
     Padding(padding: const EdgeInsets.only(bottom: 40))
   ],

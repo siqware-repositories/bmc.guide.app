@@ -16,44 +16,44 @@ String _restaurantUrl = 'https://bmc.guide.siqware.com/api/restaurant-api';
 List travelApi = [];
 List restaurantApi = [];
 
-List<ItemCard> travelPlaceCard = [
-  ItemCard(
-      "https://kohsantepheapdaily.com.kh/wp-content/uploads/2019/12/d87365f00eaf4dfa813c1d848539bb37-8.jpg",
-      "បន្ទាយឆ្មារ",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      [
-        'https://i2.wp.com/www.visitbanteaychhmar.org/wp-content/uploads/2014/12/Dharmasala-of-Banteay-Chhmar.jpg?ssl=1',
-        'https://upload.wikimedia.org/wikipedia/commons/8/88/Banteay_Chhmar_Temple_Entrance.JPG',
-        'https://media-cdn.tripadvisor.com/media/photo-s/13/4a/90/99/banteay-chhmar-temple.jpg'
-      ]
-  )
-];
-
-List<ItemCard> restaurantCard = [
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-];
-List<ItemCard> hotelCard = [
-  ItemCard(
-      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
-      "Kathmandu",
-      "12 Feb",
-      "10",
-      "500",
-      '440',
-      ['']
-  ),
-];
+//List<ItemCard> travelPlaceCard = [
+//  ItemCard(
+//      "https://kohsantepheapdaily.com.kh/wp-content/uploads/2019/12/d87365f00eaf4dfa813c1d848539bb37-8.jpg",
+//      "បន្ទាយឆ្មារ",
+//      "12 Feb",
+//      "10",
+//      "500",
+//      '440',
+//      [
+//        'https://i2.wp.com/www.visitbanteaychhmar.org/wp-content/uploads/2014/12/Dharmasala-of-Banteay-Chhmar.jpg?ssl=1',
+//        'https://upload.wikimedia.org/wikipedia/commons/8/88/Banteay_Chhmar_Temple_Entrance.JPG',
+//        'https://media-cdn.tripadvisor.com/media/photo-s/13/4a/90/99/banteay-chhmar-temple.jpg'
+//      ]
+//  )
+//];
+//
+//List<ItemCard> restaurantCard = [
+//  ItemCard(
+//      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
+//      "Kathmandu",
+//      "12 Feb",
+//      "10",
+//      "500",
+//      '440',
+//      ['']
+//  ),
+//];
+//List<ItemCard> hotelCard = [
+//  ItemCard(
+//      "https://cdn.pixabay.com/photo/2013/03/02/02/41/city-89197_960_720.jpg",
+//      "Kathmandu",
+//      "12 Feb",
+//      "10",
+//      "500",
+//      '440',
+//      ['']
+//  ),
+//];
 
 
 
@@ -189,11 +189,18 @@ Future<String> getRestaurantApi() async {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index){
                   return ListItemCard(
+                      travelApi[index]['id'],
                       travelApi[index]['title'],
-                      travelApi[index]['description'],
                       travelApi[index]['thumbnail'],
+                      travelApi[index]['description'],
+                      travelApi[index]['location'],
+                      travelApi[index]['location_url'],
+                      travelApi[index]['category'],
+                      travelApi[index]['status'],
+                      travelApi[index]['views'],
+                      travelApi[index]['created_at'],
                       travelApi[index]['gallery']['gallery_detail'],
-                      travelApi[index]['views']);
+                  );
               },
             ) : Container(
               child: Center(
@@ -235,11 +242,18 @@ Future<String> getRestaurantApi() async {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index){
                 return ListItemCard(
-                    restaurantApi[index]['title'],
-                    restaurantApi[index]['description'],
-                    restaurantApi[index]['thumbnail'],
-                    restaurantApi[index]['gallery']['gallery_detail'],
-                    restaurantApi[index]['views']);
+                  restaurantApi[index]['id'],
+                  restaurantApi[index]['title'],
+                  restaurantApi[index]['thumbnail'],
+                  restaurantApi[index]['description'],
+                  restaurantApi[index]['location'],
+                  restaurantApi[index]['location_url'],
+                  restaurantApi[index]['category'],
+                  restaurantApi[index]['status'],
+                  restaurantApi[index]['views'],
+                  restaurantApi[index]['created_at'],
+                  restaurantApi[index]['gallery']['gallery_detail'],
+                );
 
               },
             ),
@@ -276,7 +290,7 @@ Future<String> getRestaurantApi() async {
             child:
                 ListView(
                   scrollDirection: Axis.horizontal,
-                  children: hotelCard
+//                  children: hotelCard
                 ),
           ),
           Padding(padding: const EdgeInsets.only(bottom: 20))

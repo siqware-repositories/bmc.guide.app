@@ -54,17 +54,17 @@ class SlideHeader extends StatelessWidget {
       imgList,
       (index, i) {
         return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => 
-                  AboutThisPlace(
-                    i['img'], i['title'],'Good luck', i['gallary']
-                  )
-                )
-              );
-            },
+//            onTap: () {
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(
+//                  builder: (context) =>
+//                  AboutThisPlace(
+//                    i['img'], i['title'],'Good luck', i['gallary']
+//                  )
+//                )
+//              );
+//            },
             child: Container(
               margin: EdgeInsets.all(5.0),
               child: ClipRRect(

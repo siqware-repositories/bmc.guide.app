@@ -80,12 +80,18 @@ class _TravelHomeState extends State<TravelHome> {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index){
                     return ListItemCard(
-                        travelApi[index]['title'],
-                        travelApi[index]['description'],
-                        travelApi[index]['thumbnail'],
-                        travelApi[index]['gallery']['gallery_detail'],
-                        travelApi[index]['views']);
-
+                      travelApi[index]['id'],
+                      travelApi[index]['title'],
+                      travelApi[index]['thumbnail'],
+                      travelApi[index]['description'],
+                      travelApi[index]['location'],
+                      travelApi[index]['location_url'],
+                      travelApi[index]['category'],
+                      travelApi[index]['status'],
+                      travelApi[index]['views'],
+                      travelApi[index]['created_at'],
+                      travelApi[index]['gallery']['gallery_detail'],
+                    );
                   },
                 ) : Container(child: Center(child: Text('Data loading ...')))
               ),
