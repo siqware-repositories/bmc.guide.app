@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-String cover;
 String _travelUrl = 'https://bmc.guide.siqware.com/api/travel-api';
 String _restaurantUrl = 'https://bmc.guide.siqware.com/api/restaurant-api';
 List travelApi = [];
@@ -65,7 +64,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ServiceApi serviceApi = ServiceApi();
+  /*ServiceApi serviceApi = ServiceApi();
 
   Future<List<TravelApi>> _getAllTravelApi() async {
     var result = await serviceApi.getAllTravelApi();
@@ -91,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
     return _list;
-  }
+  }*/
+
   Future<String> getTravelApi() async {
     http.Response response = await http.get(_travelUrl);
     this.setState(() {
