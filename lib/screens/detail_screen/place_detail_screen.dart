@@ -75,7 +75,7 @@ class _TravelHomeState extends State<TravelHome> {
               ),
               Container(
                 height: 210,
-                child: ListView.builder(
+                child: travelApi.length != 0 ? ListView.builder(
                   itemCount: travelApi.length == null ? 0 : travelApi.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index){
@@ -87,7 +87,7 @@ class _TravelHomeState extends State<TravelHome> {
                         travelApi[index]['views']);
 
                   },
-                ),
+                ) : Container(child: Center(child: Text('Data loading ...')))
               ),
               Padding(padding: const EdgeInsets.only(bottom: 40))
             ],

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:bmc_guide/get_api/models/travel_api.dart';
+import 'package:bmc_guide/get_api/services/service.dart';
 import 'package:bmc_guide/helpers/drawer_navigation.dart';
 import 'package:bmc_guide/helpers/item_card.dart';
 import 'package:bmc_guide/page/main_page.dart';
@@ -63,7 +65,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ServiceApi serviceApi = ServiceApi();
 
+  Future<List<TravelApi>> _getAllTravelApi() async {
+    var result = await serviceApi.getAllTravelApi();
+    List<TravelApi> _list = List<TravelApi>();
+    if (result != null) {
+      var travelApis = json.decode(result.body);
+      travelApis.forEach((travelApi) {
+        var model = TravelApi();
+        model.title = travelApi['title'];
+        model.thumbnail = travelApi['thumbnail'];
+        model.description = travelApi['description'];
+        model.location = travelApi['location'];
+        model.locationUrl = travelApi['location_url'];
+        model.category = travelApi['category'];
+        model.status = travelApi['status'];
+        model.views = travelApi['views'];
+        model.gallery = travelApi['gallery'];
+        model.createdAt = travelApi['created_at'];
+        setState(() {
+          _list.add(model);
+          print(model);
+        });
+      });
+    }
+    return _list;
+  }
   Future<String> getTravelApi() async {
     http.Response response = await http.get(_travelUrl);
     this.setState(() {
@@ -132,19 +160,46 @@ Future<String> getRestaurantApi() async {
           ),
           Container(
             height: 210,
-            child: ListView.builder(
+            /*child: FutureBuilder<List<TravelApi>> (
+              future: _getAllTravelApi(),
+              builder: (BuildContext context, AsyncSnapshot<List<TravelApi>> snapshot){
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index){
+                      return ListItemCard(
+                          snapshot.data[index].title,
+                          snapshot.data[index].description,
+                          snapshot.data[index].thumbnail,
+                          snapshot.data[index].gallery['gallery_detail'],
+                          snapshot.data[index].views,
+                      );
+                    },
+                  );
+                } else {
+                  return Container(
+                    child: Text('Loading data....'),
+                  );
+                }
+              },
+            ),*/
+            child: travelApi.length != 0 ? ListView.builder(
               itemCount: travelApi.length == null ? 0 : travelApi.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index){
-                return ListItemCard(
-                    travelApi[index]['title'],
-                    travelApi[index]['description'],
-                    travelApi[index]['thumbnail'],
-                    travelApi[index]['gallery']['gallery_detail'],
-                    travelApi[index]['views']);
-
+                  return ListItemCard(
+                      travelApi[index]['title'],
+                      travelApi[index]['description'],
+                      travelApi[index]['thumbnail'],
+                      travelApi[index]['gallery']['gallery_detail'],
+                      travelApi[index]['views']);
               },
-            ),
+            ) : Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
