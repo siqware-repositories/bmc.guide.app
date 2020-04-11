@@ -1,5 +1,6 @@
 import 'package:bmc_guide/screens/detail_screen/Servie_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/hotel_detail_screen.dart';
+import 'package:bmc_guide/screens/detail_screen/hotel_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/place_detail_screen.dart';
 import 'package:bmc_guide/screens/detail_screen/restaurant_detail_screen.dart';
 import 'package:bmc_guide/screens/home_screens/home_screen.dart';
