@@ -1,71 +1,11 @@
-import 'package:bmc_guide/get_api/services/load_restaurant_data.dart';
 import 'package:flutter/material.dart';
 
-class RestaurantHome extends StatefulWidget {
+class DetailScreenTop extends StatefulWidget {
   @override
-  _RestaurantHomeState createState() => _RestaurantHomeState();
+  _DetailScreenTopState createState() => _DetailScreenTopState();
 }
 
-class _RestaurantHomeState extends State<RestaurantHome> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        flexibleSpace: Container(
-          decoration: new BoxDecoration(
-            gradient: new LinearGradient(colors: <Color>[
-              //7928D1
-              const Color(0xFF0075D1),
-              const Color(0xFF00A2E3),
-            ], stops: <double>[
-              0.4,
-              0.8
-            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
-          ),
-        ),
-        title: Text('Trvel Place', style: TextStyle(fontFamily: 'Lobster'),),
-      ),
-      body: ListView(
-        children: <Widget>[
-          HomeScreenTop(),
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Text("Tavel List",
-                      style: TextStyle(
-                          fontFamily: 'Lobster',
-                          color: Colors.black87,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700),),
-                    Spacer(),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              LoadRestaurantData(),
-              Padding(padding: const EdgeInsets.only(bottom: 40))
-            ],
-          )],
-      ),
-    );
-  }
-}
-
-
-class HomeScreenTop extends StatefulWidget {
-  @override
-  _HomeScreenTopState createState() => _HomeScreenTopState();
-}
-
-class _HomeScreenTopState extends State<HomeScreenTop> {
+class _DetailScreenTopState extends State<DetailScreenTop> {
 
   final TextStyle dropdownMenuLabel =
   TextStyle(color: Colors.white, fontSize: 16);
@@ -168,5 +108,3 @@ class WaveClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
-
-

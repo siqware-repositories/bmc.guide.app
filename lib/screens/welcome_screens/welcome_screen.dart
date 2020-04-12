@@ -1,8 +1,18 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:bmc_guide/get_api/bloc/restaurant_bloc.dart';
+import 'package:bmc_guide/get_api/bloc/travel_bloc.dart';
+import 'package:bmc_guide/get_api/models/data_api.dart';
 import 'package:bmc_guide/helpers/drawer_navigation.dart';
 import 'package:bmc_guide/screens/welcome_screens/welcome_header.dart';
 import 'package:bmc_guide/screens/welcome_screens/welcome_quick_actions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+
+final List<DataApi> travel = [];
+final List<DataApi> restaurant = [];
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -10,9 +20,48 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  StreamController<DataApi> streamControllerTra = StreamController.broadcast();
+  StreamController<DataApi> streamControllerRes = StreamController.broadcast();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    streamControllerTra.stream.listen((data) => setState(() => travel.add(data)));
+    streamControllerRes.stream.listen((data) => setState(() => restaurant.add(data)));
+    Load(streamControllerTra, 'travel-api');
+    Load(streamControllerRes, 'restaurant-api');
+  }
+
+  Load(StreamController<DataApi> sc, String api) async {
+    String url = 'https://bmc.guide.siqware.com/api/'+ api;
+    var client =new http.Client();
+    var req = new http.Request('get', Uri.parse(url));
+    var streamRes = await client.send(req);
+    streamRes.stream.transform(utf8.decoder).transform(json.decoder).expand((element) => element).map((map) => DataApi.fromJsonMap(map)).pipe(sc);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    streamControllerTra?.close();
+    streamControllerRes?.close();
+//    streamControllerTra = null;
+//    streamControllerRes = null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,title: 'BMC Guide', home: WelcomeScreenPage());
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TravelBloc()),
+        ChangeNotifierProvider(create: (_) => RestaurantBloc()),
+      ],
+      child: MaterialApp(debugShowCheckedModeBanner: false,
+        title: 'BMC Guide',
+        home: WelcomeScreenPage(),
+      ),
+    );
   }
 }
 
@@ -22,8 +71,20 @@ class WelcomeScreenPage extends StatefulWidget {
 }
 
 class _WelcomeScreenPageState extends State<WelcomeScreenPage> {
+
   @override
   Widget build(BuildContext context) {
+    final TravelBloc travelBloc = Provider.of<TravelBloc>(context);
+    if(travelBloc.travelApi.length == 0){
+      travelBloc.travelApi = travel;
+      travel.clear();
+    }
+    final RestaurantBloc restaurantBloc = Provider.of<RestaurantBloc>(context);
+    if(restaurantBloc.restaurantApi.length == 0){
+      restaurantBloc.restaurantApi = restaurant;
+      restaurant.clear();
+    }
+
     return Scaffold(
       drawer: DrawerNavigation(),
       appBar: AppBar(
